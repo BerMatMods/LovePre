@@ -709,4 +709,60 @@ Gracias por ser tú, por amar, por existir. Este regalo es solo una pequeña mue
       document.getElementById('letterModal').style.display = 'none';
     });
 
-    // --- Efecto de escritura ---
+        // --- Efecto de escritura ---
+    function typeWriter(element, text, speed = 50) {
+      let i = 0;
+      element.textContent = '';
+      const timer = setInterval(() => {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+        } else {
+          element.classList.add('show');
+          clearInterval(timer);
+        }
+      }, speed);
+    }
+
+    function typeWriterWithHearts(element, text, speed = 45) {
+      let i = 0;
+      element.textContent = '';
+      const hearts = ['❤️', '💖', '💗', '💕', '💞'];
+      const container = document.querySelector('.modal-content');
+      const timer = setInterval(() => {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          if (i % 10 === 0) {
+            const heart = document.createElement('div');
+            heart.className = 'typing-heart';
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = (Math.random() * 80 + 10) + 'vw';
+            heart.style.top = (Math.random() * 60 + 20) + 'vh';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+          }
+        } else {
+          clearInterval(timer);
+        }
+      }, speed);
+    }
+
+    // --- Corazones flotantes ---
+    window.onload = () => {
+      const container = document.getElementById('floatingHearts');
+      const hearts = ['❤', '💖', '💗', '💕', '💞'];
+      setInterval(() => {
+        const h = document.createElement('div');
+        h.className = 'heart-float';
+        h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.fontSize = (22 + Math.random() * 14) + 'px';
+        h.style.animationDuration = '16s, 3.2s';
+        container.appendChild(h);
+        setTimeout(() => h.remove(), 18000);
+      }, 800);
+    };
+  </script>
+</body>
+</html>
